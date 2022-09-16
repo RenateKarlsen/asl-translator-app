@@ -1,9 +1,10 @@
 import "./App.css"
+import Routing from "./routing/Routing"
 
 function App() {
   return (
     <div className="App">
-      <p>Thea er grei</p>
+      <Routing />
     </div>
   )
 }
