@@ -4,4 +4,5 @@ const TranslationPage = () => {
     )
 }
 
+
 export default TranslationPage;
