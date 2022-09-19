@@ -24,3 +24,7 @@ export const postUser = (userName) => {
     })
     .catch((error) => {})
 }
+
+export const fetchAllUsers = () => {
+  return fetch(`${apiURL}/translations`).then((response) => response.json())
+}

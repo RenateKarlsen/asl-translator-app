@@ -1,8 +1,20 @@
+import { useEffect } from "react"
 import { useState } from "react"
-import { postUser } from "../services/UserService"
+import { fetchAllUsers, postUser } from "../services/UserService"
 
 const LoginPage = () => {
   const [userName, setUserName] = useState("")
+  const [users, setUsers] = useState([])
+
+  useEffect(() => {
+    fetchAllUsers()
+      .then((users) => {
+        setUsers(users)
+      })
+      .catch((error) => {
+        console.error(error.message)
+      })
+  }, [])
 
   const handleNameChange = (event) => {
     setUserName(event.target.value)
@@ -21,6 +33,11 @@ const LoginPage = () => {
           <button type="submit">Create new user</button>
         </fieldset>
       </form>
+      <div>
+        {users.map((user) => (
+          <p>{user.username}</p>
+        ))}
+      </div>
       <p>Heihei</p>
     </>
   )
