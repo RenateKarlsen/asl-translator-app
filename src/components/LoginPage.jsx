@@ -16,13 +16,27 @@ const LoginPage = () => {
       })
   }, [])
 
+  const userExists = () => {
+    users.forEach((user) => {
+      console.log(user.username)
+      if (user.username === userName) {
+        return true
+      }
+    })
+  }
+
   const handleNameChange = (event) => {
     setUserName(event.target.value)
   }
 
   const handleRegisterSubmit = (event) => {
     event.preventDefault()
-    postUser(userName)
+
+    if (userExists) {
+      alert("NEI")
+    } else {
+      postUser(userName)
+    }
   }
 
   return (
