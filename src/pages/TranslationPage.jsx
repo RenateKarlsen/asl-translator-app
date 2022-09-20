@@ -1,5 +1,7 @@
+import withAuth from "../hoc/withAuth"
+
 const TranslationPage = () => {
   return <h1> hallo translate</h1>
 }
 
-export default TranslationPage
+export default withAuth(TranslationPage)

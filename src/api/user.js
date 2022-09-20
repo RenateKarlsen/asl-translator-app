@@ -34,6 +34,7 @@ const createUser = async (username) => {
     return [error.message, []]
   }
 }
+
 export const loginUser = async (username) => {
   const [checkError, user] = await checkForUser(username)
   if (checkError != null) {
