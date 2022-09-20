@@ -8,3 +8,8 @@ export const storageRead = (key) => {
   }
   return null
 }
+
+
+export const storageDelete = (key) => {
+  localStorage.removeItem(key)
+}
