@@ -1,6 +1,4 @@
 import { Link } from "react-router-dom"
-//import { STORAGE_KEY_USER } from "../const/storageKeys"
-//import { storageSave } from "../../utils/storage"
 import { useUser } from "../../context/UserContext"
 import { storageDelete } from "../../utils/storage"
 
@@ -11,7 +9,7 @@ const ProfileActions = () => {
 
     const handleLogoutClick = () => {
         if(window.confirm("Are you sure?")) {
-           // storageDelete(STORAGE_KEY_USER)
+            storageDelete("user")
             setUser(null)
         }
 
