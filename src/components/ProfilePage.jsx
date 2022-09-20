@@ -1,6 +1,12 @@
+
+
+const handleLogOut = (e) => {
+    
+}
 const ProfilePage = () => {
     return (
         <h1> Hei fra profilen din</h1>
+
     )
 }
 
