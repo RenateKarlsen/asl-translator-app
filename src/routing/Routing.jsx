@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
-import LoginPage from "../components/LoginPage"
-import TranslationPage from "../components/TranslationPage"
-import ProfilePage from "../components/ProfilePage"
+import LoginPage from "../pages/LoginPage"
+import TranslationPage from "../pages/TranslationPage"
+import ProfilePage from "../pages/ProfilePage"
 
 const Routing = () => {
   return (
