@@ -38,9 +38,11 @@ const LoginPage = () => {
     event.preventDefault()
 
     if (userExists()) {
-      navigate("/profile")
+      navigate("/translation")
     } else {
       postUser(userName)
+      alert("New user created")
+      navigate("/translation")
     }
   }
 
