@@ -1,10 +1,12 @@
 import { useEffect } from "react"
 import { useState } from "react"
 import { fetchAllUsers, postUser } from "../services/UserService"
+import { useNavigate } from "react-router-dom"
 
 const LoginPage = () => {
   const [userName, setUserName] = useState("")
   const [users, setUsers] = useState([])
+  const navigate = useNavigate()
 
   useEffect(() => {
     fetchAllUsers()
@@ -17,15 +19,15 @@ const LoginPage = () => {
   }, [])
 
   const userExists = () => {
-    let boogie = false;
+    let boogie = false
     users.forEach((user) => {
-      console.log(user.username);
+      console.log(user.username)
       if (user.username === userName) {
-        boogie = true;
-        return boogie;
+        boogie = true
+        return boogie
       }
     })
-    return boogie;
+    return boogie
   }
 
   const handleNameChange = (event) => {
@@ -36,7 +38,7 @@ const LoginPage = () => {
     event.preventDefault()
 
     if (userExists()) {
-      alert("NEI")
+      navigate("/profile")
     } else {
       postUser(userName)
     }
