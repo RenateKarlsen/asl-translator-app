@@ -15,7 +15,7 @@ const ProfileActions = () => {
 
     }
     return (
-        <><p>Action</p><ul>
+        <><ul>
             <li>
                 <Link to="/translation"></Link>
             </li>

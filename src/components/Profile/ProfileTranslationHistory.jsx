@@ -2,7 +2,7 @@ import ProfileTranslationHistoryASL from "./ProfileTranslationHistoryASL"
 
 const ProfileTranslationHistory = ( { translations }) => {
    
-    const translationList = translations.map(
+    const translationList = translations.slice(-10).map(
         (translation, index) => <ProfileTranslationHistoryASL key={ index + "-" + translation } translation={ translation } />)
    
     return (
