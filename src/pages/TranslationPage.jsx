@@ -1,7 +1,13 @@
+import { TranslationArea } from "../components/Translation/TranslationArea"
 import withAuth from "../hoc/withAuth"
 
 const TranslationPage = () => {
-  return <h1> hallo translate</h1>
+  return (
+    <>
+      <h1> hallo translate</h1>
+      <TranslationArea />
+    </>
+  )
 }
 
 export default withAuth(TranslationPage)
