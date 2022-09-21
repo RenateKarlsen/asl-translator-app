@@ -1,27 +1,37 @@
 import { useState } from "react"
 import { useForm } from "react-hook-form"
+import { useUser } from "../../context/UserContext"
+import { storageSave } from "../../utils/storage"
 
 const textConfig = {
   required: true,
-  minLength: 0,
+  minLength: 1,
+  pattern: /[A-Za-z]/,
 }
 
 const TranslationForm = () => {
   const { register, handleSubmit } = useForm()
-  const [textText, setTextText] = useState()
+  const [text, setText] = useState([])
+  const { user } = useUser()
 
   const onSubmit = (data) => {
-    setTextText(data.text)
-    console.log(data.text)
+    //Sets text to be an array of letters from input
+    setText(convertToLetterArray(data.text))
+
+    //Pushes new translation into translations array and then saves the user
+    user.translations.push(data.text)
+    storageSave("user", user)
   }
 
-  const image = (() => {
-    if (!textText) {
-      return <p>null</p>
-    }
-    if (textText !== null) {
-      return <img alt='letter' src={require(`../assets/${textText}.png`)}></img>
-    }
+  const convertToLetterArray = (text) => {
+    const letters = Array.from(text.toLowerCase())
+    return letters
+  }
+
+  const translated = (() => {
+    return text.map((letter) => {
+      return <img alt='letter' src={require(`../assets/${letter}.png`)}></img>
+    })
   })()
 
   return (
@@ -38,7 +48,8 @@ const TranslationForm = () => {
         <button type='submit'>Go</button>
       </form>
       <div>
-        <div>{image}</div>
+        {}
+        <div>{translated}</div>
       </div>
     </div>
   )
