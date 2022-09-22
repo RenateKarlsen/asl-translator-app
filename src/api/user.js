@@ -2,13 +2,15 @@ import { createHeaders } from "./index.js"
 
 const apiUrl = process.env.REACT_APP_API_URL
 
-const checkForUser = async (username) => {
+export const checkForUser = async (username) => {
   try {
     const response = await fetch(`${apiUrl}?username=${username}`)
     if (!response.ok) {
       throw new Error("Could not complete request")
     }
+
     const data = await response.json()
+    console.log(data)
     return [null, data]
   } catch (error) {
     return [error.message, []]
@@ -27,6 +29,29 @@ const createUser = async (username) => {
     })
     if (!response.ok) {
       throw new Error("Could not create user with username " + username)
+    }
+    const data = await response.json()
+    return [null, data]
+  } catch (error) {
+    return [error.message, []]
+  }
+}
+
+export const updateTranslations = async (newTranslations, user) => {
+  let putData = {
+    username: user.username,
+    translations: newTranslations,
+  }
+  try {
+    const response = await fetch(`${apiUrl}/${user.id}`, {
+      method: "PUT",
+      headers: createHeaders(),
+      body: JSON.stringify(putData),
+    })
+    if (!response.ok) {
+      throw new Error(
+        "Could not update user with translations " + user.translations
+      )
     }
     const data = await response.json()
     return [null, data]

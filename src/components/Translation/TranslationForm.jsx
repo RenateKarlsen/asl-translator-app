@@ -2,11 +2,12 @@ import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { useUser } from "../../context/UserContext"
 import { storageSave } from "../../utils/storage"
+import { updateTranslations } from "../../api/user"
 
 const textConfig = {
   required: true,
   minLength: 1,
-  pattern: /[A-Za-z]/,
+  pattern: /[A-Za-z]/, //TODO: Det er fortsatt lov til å ha tall inni blant bokstaver
 }
 
 const TranslationForm = () => {
@@ -18,8 +19,9 @@ const TranslationForm = () => {
     //Sets text to be an array of letters from input
     setText(convertToLetterArray(data.text))
 
-    //Pushes new translation into translations array and then saves the user
+    //Pushes new translation into translations array and then saves the user bo
     user.translations.push(data.text)
+    updateTranslations(user.translations, user)
     storageSave("user", user)
   }
 
