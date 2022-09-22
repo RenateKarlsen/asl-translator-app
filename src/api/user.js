@@ -2,6 +2,21 @@ import { createHeaders } from "./index.js"
 
 const apiUrl = process.env.REACT_APP_API_URL
 
+export const fetchUser = async (userId) => {
+  try {
+    const response = await fetch(`${apiUrl}/${userId}`)
+    if (!response.ok) {
+      throw new Error("Could not complete request")
+    }
+
+    const data = await response.json()
+    console.log(data)
+    return [null, data]
+  } catch (error) {
+    return [error.message, []]
+  }
+}
+
 export const checkForUser = async (username) => {
   try {
     const response = await fetch(`${apiUrl}?username=${username}`)
@@ -37,16 +52,37 @@ const createUser = async (username) => {
   }
 }
 
-export const updateTranslations = async (newTranslations, user) => {
-  let putData = {
-    username: user.username,
-    translations: newTranslations,
-  }
+export const removeTranslations = async (user) => {
   try {
     const response = await fetch(`${apiUrl}/${user.id}`, {
       method: "PUT",
       headers: createHeaders(),
-      body: JSON.stringify(putData),
+      body: JSON.stringify({
+        username: user.username,
+        translations: [],
+      }),
+    })
+    if (!response.ok) {
+      throw new Error(
+        "Could not update user with translations " + user.translations
+      )
+    }
+    const data = await response.json()
+    return [null, data]
+  } catch (error) {
+    return [error.message, []]
+  }
+}
+
+export const updateTranslations = async (newTranslations, user) => {
+  let patchData = {
+    translations: newTranslations,
+  }
+  try {
+    const response = await fetch(`${apiUrl}/${user.id}`, {
+      method: "PATCH",
+      headers: createHeaders(),
+      body: JSON.stringify(patchData),
     })
     if (!response.ok) {
       throw new Error(
