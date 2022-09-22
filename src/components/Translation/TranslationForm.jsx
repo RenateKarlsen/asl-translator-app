@@ -8,7 +8,7 @@ const textConfig = {
   required: true,
   minLength: 1,
   maxLength: 40,
-  pattern: /[A-Za-z]/, //TODO: Det er fortsatt lov til å ha tall inni blant bokstaver
+  pattern: /^[A-Za-z]+$/,
 }
 
 const TranslationForm = () => {
