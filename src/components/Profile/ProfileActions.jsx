@@ -13,17 +13,25 @@ const ProfileActions = () => {
     }
   }
 
-  const handleClearClick = () => {
-    if (window.confirm("Are you sure?")) {
-      removeTranslations(user)
-      storageDelete("user")
-      storageSave("user", {
-        username: user.username,
-        id: user.id,
-        translations: [],
-      })
-      window.location.reload()
+  const handleClearHistoryClick = async () => {
+    if (!window.confirm("Are you sure? \nThis cannot be undone!")) {
+      return
     }
+
+    const [clearError] = await removeTranslations(user.id)
+
+    if (clearError !== null) {
+      // Something went wrong...
+      return
+    }
+
+    const updatedUser = {
+      ...user,
+      translations: [],
+    }
+
+    storageSave("user", updatedUser)
+    setUser(updatedUser)
   }
 
   return (
@@ -33,7 +41,7 @@ const ProfileActions = () => {
           <Link to='/translation'></Link>
         </li>
         <li>
-          <button onClick={handleClearClick}>Clear history</button>
+          <button onClick={handleClearHistoryClick}>Clear history</button>
         </li>
         <li>
           <button onClick={handleLogoutClick}>Logout</button>
