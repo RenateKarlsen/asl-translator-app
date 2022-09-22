@@ -4,7 +4,7 @@ Lost in Translation. An online sign language translator as a Single Page Applica
 The application acts as a "translator" from american words and sentences to sign language.
 
 ## Description
-When running the program the user will be presented with a Login-page. The user is asked to enter their username and sign in. When logged in the user will be redirected to a translator-page where they can enter a word or a short sentence they want to translate. 
+When running the program the user will be presented with a Login-page. The user is asked to enter their username and sign in. When logged in, the user will be redirected to a translator-page where they can enter a word or a short sentence they want to translate. 
 The user also has a profile-page where their last 10 translations are displayed. Here, the user has the option to clear their history of translations, and to log out. 
 
 ## Install 
