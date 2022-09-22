@@ -55,10 +55,9 @@ const createUser = async (username) => {
 export const removeTranslations = async (user) => {
   try {
     const response = await fetch(`${apiUrl}/${user.id}`, {
-      method: "PUT",
+      method: "PATCH",
       headers: createHeaders(),
       body: JSON.stringify({
-        username: user.username,
         translations: [],
       }),
     })
