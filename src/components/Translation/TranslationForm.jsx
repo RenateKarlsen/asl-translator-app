@@ -7,6 +7,7 @@ import { updateTranslations } from "../../api/user"
 const textConfig = {
   required: true,
   minLength: 1,
+  maxLength: 40,
   pattern: /[A-Za-z]/, //TODO: Det er fortsatt lov til å ha tall inni blant bokstaver
 }
 
@@ -21,6 +22,7 @@ const TranslationForm = () => {
 
     //Pushes new translation into translations array and then saves the user bo
     user.translations.push(data.text)
+
     updateTranslations(user.translations, user)
     storageSave("user", user)
   }
@@ -31,8 +33,14 @@ const TranslationForm = () => {
   }
 
   const translated = (() => {
-    return text.map((letter) => {
-      return <img alt='letter' src={require(`../assets/${letter}.png`)}></img>
+    return text.map((letter, index) => {
+      return (
+        <img
+          key={index}
+          alt='letter'
+          src={require(`../assets/${letter}.png`)}
+        ></img>
+      )
     })
   })()
 
