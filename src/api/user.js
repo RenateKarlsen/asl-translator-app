@@ -52,9 +52,9 @@ const createUser = async (username) => {
   }
 }
 
-export const removeTranslations = async (user) => {
+export const removeTranslations = async (userId) => {
   try {
-    const response = await fetch(`${apiUrl}/${user.id}`, {
+    const response = await fetch(`${apiUrl}/${userId}`, {
       method: "PATCH",
       headers: createHeaders(),
       body: JSON.stringify({
@@ -62,9 +62,7 @@ export const removeTranslations = async (user) => {
       }),
     })
     if (!response.ok) {
-      throw new Error(
-        "Could not update user with translations " + user.translations
-      )
+      throw new Error("Could not update user with translations " + userId)
     }
     const data = await response.json()
     return [null, data]
